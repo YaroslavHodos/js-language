@@ -48,3 +48,4 @@ function fun(index) {
         }
     }
 }
+console.log(fun(5)(10,3))

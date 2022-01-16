@@ -10,10 +10,10 @@ function encode1(num, codingString)
     {
         do
         {
-            const digit = Math.trunc(num % (codingString.length-1));
+            const digit = Math.trunc(num % (codingString.length));
             const symb = getSymbol(digit,codingString);
             res = symb + res;
-            num = Math.trunc(num / (codingString.length-1));
+            num = Math.trunc(num / (codingString.length));
         }
         while(num >= 1);
         return res;
@@ -28,4 +28,4 @@ function checkDuplicate(codingString)
 {
     return new Set(codingString).size != codingString.length;
 }
-console.log(encode1(25,'sewa'));
+console.log(encode1(355,'abcda'));

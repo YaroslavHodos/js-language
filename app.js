@@ -11,7 +11,7 @@ function encode1(num, codingString)
     {
         do
         {
-            const digit = Math.trunc(num % (codingString.length));
+            const digit = (num % (codingString.length));
             const symb = getSymbol(digit,codingString);
             res = symb + res;
             num = Math.trunc(num / (codingString.length));

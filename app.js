@@ -29,4 +29,4 @@ function checkDuplicate(codingString)
 {
     return new Set(codingString).size != codingString.length;
 }
-console.log(encode1(355,'123'));
+console.log(encode1(5,'.-'));

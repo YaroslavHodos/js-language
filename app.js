@@ -5,6 +5,7 @@ function encode1(num, codingString)
     if(checkDuplicate(codingString) == true)
     {
         console.log("Error: duplicate symbols in coding string")
+        return;
     }
     else
     {
@@ -22,10 +23,10 @@ function encode1(num, codingString)
 function getSymbol(digit, codingString)
 {
     let char = codingString[digit];
-    return "" + char;
+    return char;
 }
 function checkDuplicate(codingString)
 {
     return new Set(codingString).size != codingString.length;
 }
-console.log(encode1(355,'abcda'));
+console.log(encode1(355,'123'));

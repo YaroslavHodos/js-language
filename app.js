@@ -1,32 +1,27 @@
-function encode1(num, codingString) 
+function encode(num, codingString)
 {
-    //codingString - any string with not repeated symbols
-    let res = "";
-    if(checkDuplicate(codingString) == true)
+    let flRepeated = false;
+    for (let i = 0; i < codingString.length; i++)
     {
-        console.log("Error: duplicate symbols in coding string")
-        return;
+        if (codingString.lastIndexOf(codingString[i]) != i)
+        {
+            console.log(`coding string has repeated symbol ${codingString[i]}`)
+            flRepeated = true;
+        }
     }
-    else
+    if (!flRepeated)
     {
+        let res = "";
+        const base = codingString.length;
         do
         {
-            const digit = (num % (codingString.length));
-            const symb = getSymbol(digit,codingString);
-            res = symb + res;
-            num = Math.trunc(num / (codingString.length));
+            const digit = Math.trunc(num % base);
+            const digitSymb = codingString[digit];
+            res = digitSymb + res;
+            num = Math.trunc(num / base)
         }
-        while(num >= 1);
+        while(num != 0);
         return res;
-    }   
+    }
 }
-function getSymbol(digit, codingString)
-{
-    let char = codingString[digit];
-    return char;
-}
-function checkDuplicate(codingString)
-{
-    return new Set(codingString).size != codingString.length;
-}
-console.log(encode1(5,'.-'));
+console.log(`encode(5, '.-') = ${encode(5, '.-')}`);

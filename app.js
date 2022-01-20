@@ -1,34 +1,28 @@
-console.log("HW#12");
-const comparator = (n1,n2) => {
-    let res = n1 % 2 - n2 % 2;
-    if (res == 0) {
-        res = n1 % 2 == 0 ? n1 - n2 : n2 - n1;
-    }
-    return res;
-}
-const arHw = [13, 28, 4, 15, 25, -10, 40, 17, 27];
-arHw.sort(comparator);
-console.log(arHw);
+const ar = [-10, 50, -12, 80, 40];
+ar.push(70);
 
-const matrix =  [[1,2],[3,4],[5,6]];
-function matrixTransp(matrix) {
-    const res = [];
-    for (let i = 0; i < matrix[0].length; i++) {
-        res.push([]);
-        for (let j = 0; j < matrix.length; j++) {
-            res[i].push(matrix[j][i]);
-        }
-    }
-}
-displsyMatrix(matrixTransp(matrix));
+// let str = '';
+// ar.forEach(function(n) {
+//     str += n + '#';
+// })
+//str = str.substring(0, str.length-1);
 
-function displsyMatrix(matrix) {
-    for (let i = 0; i < matrix.length; i++) {
-        let row = '';
-        console.log('')
-        for(let j = 0; j <matrix[i].length; j++) {
-            row = row + matrix[i][j] + '   ';
-        }
-        console.log(row);
-    }
-}
+// const ar1 = ar.slice(1);
+//  let str = '' + ar[0];
+//  ar1.forEach(n => str += '#' + n);
+// console.log(str);
+
+ar.forEach((n, i, a) => console.log(`${i+1} of ${a.length} - ${n}`));
+
+/**   HW#13
+  1.
+write function myForRach(array, callback-function);
+array - being itereted array
+callback-function - fun that will be called for each element of array
+call-back-function should take three argument: curent element,current index, being iterated array
+ 
+*/
+const ar2 = ar.map(n => n * 2);
+console.log(ar2);
+const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
+console.log(ar3);

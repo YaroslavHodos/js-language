@@ -15,12 +15,12 @@ function matrixTransp(matrix) {
     const res = [];
     for (let i = 0; i < matrix[0].length; i++) {
         res.push([]);
-        for (let j = o; j < matrix.length; j++) {
+        for (let j = 0; j < matrix.length; j++) {
             res[i].push(matrix[j][i]);
         }
     }
 }
-displsyMatrix(matrix);
+displsyMatrix(matrixTransp(matrix));
 
 function displsyMatrix(matrix) {
     for (let i = 0; i < matrix.length; i++) {

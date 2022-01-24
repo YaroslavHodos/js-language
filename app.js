@@ -1,28 +1,26 @@
-const ar = [-10, 50, -12, 80, 40];
-ar.push(70);
+const ar2 = [13, 17, 20, 23, 2, 40];
+const arEvenOdd = ar2.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
+console.log(arEvenOdd);
 
-// let str = '';
-// ar.forEach(function(n) {
-//     str += n + '#';
-// })
-//str = str.substring(0, str.length-1);
-
-// const ar1 = ar.slice(1);
-//  let str = '' + ar[0];
-//  ar1.forEach(n => str += '#' + n);
-// console.log(str);
-
-ar.forEach((n, i, a) => console.log(`${i+1} of ${a.length} - ${n}`));
-
-/**   HW#13
+/*
+HW#14
   1.
-write function myForRach(array, callback-function);
-array - being itereted array
-callback-function - fun that will be called for each element of array
-call-back-function should take three argument: curent element,current index, being iterated array
- 
+write myFilter(array, callback) based on myForEach
+callback - function with three possible parameters: current element, current index, referece to array
+  2.
+write myReduce(array, callback, initialResult) based on myForEach
+callback - function with three possible parameters: current element, current index, referece to array
+
 */
-const ar2 = ar.map(n => n * 2);
-console.log(ar2);
-const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
-console.log(ar3);
+
+let res = ar2.reduce((res, cur) => res + cur, 0);
+console.log(`res = ${res}`);
+const max = ar2.reduce((max, cur) => cur > max ? cur : max, ar2[0]);
+console.log(`max = ${max}`);
+res = ar2.reduce((res, cur) => res + cur);
+console.log(`res = ${res}`);// if the user call does't contain a second argument, then the first element of the array will be
+// as initial res (in this case iterating)
+
+/*
+
+ */

@@ -19,7 +19,7 @@ const max = ar2.reduce((max, cur) => cur > max ? cur : max, ar2[0]);
 console.log(`max = ${max}`);
 res = ar2.reduce((res, cur) => res + cur);
 console.log(`res = ${res}`);// if the user call does't contain a second argument, then the first element of the array will be
-// as initial res (in this case iterating)
+// as initial res (in this case iterating begins from the second element of hte array)
 
 /*
 

@@ -1,5 +1,5 @@
 function myForEach(ar, cbFunction) {
-    for (let i = o; i < ar.length; i++) {
+    for (let i = 0; i < ar.length; i++) {
         cbFunction(ar[i], i, ar);
     }
 }

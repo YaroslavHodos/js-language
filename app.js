@@ -14,15 +14,14 @@ function myFilter (arr, cb) {
 //2.
 function myReduce(array, cb, initRes) {
     let res;
-    if (initRes) {
-        res = initRes;
-        myForEach(array, (n, i, a) => res = cb(res, n, i, a));
+    if (initRes == undefined) {
+        initRes = array[0];
+        array = array.slice(1);
     }
     else {
-        res = array[0];
-        const newArray = array.slice(1);
-        myForEach(newArray, (n, i, a) => res = cb(res, n, i, a));
+        res = initRes;
     }
+    myForEach(array, (n, i, a) => res = cb(res, n, i, a));
     return res;
 }
 const ar20 = [13, 17, 20, 23, 2, 40, 15];

@@ -1,43 +1,32 @@
-const person1 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
-const person2 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
-
-console.log(`'123' == 123 is ${'123' == 123}`);
-console.log(`'123' === 123 is ${'123' === 123}`);
-
-console.log(`person1 == person2 is ${person1 == person2}`);
-console.log(`JSON.stringify(person1) == JSON.stringify(person2) is ${JSON.stringify(person1) == JSON.stringify(person2)}`);
-console.log(JSON.stringify(person1));
-console.log(`name of person1 is ${person1.name}`);
-console.log(`pers1 live in sity ${person1.addres.city}`);
-
-Object.keys(person1).forEach(k => console.log(k));// array of the object keys
-console.log("");
-
-Object.values(person1).forEach(v => console.log(v));// array of the object values
-console.log("");
-
-Object.entries(person1).forEach(c => console.log(c));// array of arrays - [key, value]
-console.log("");
-console.log(Object.entries(person1));// array of arrays - [key, value]
-
-function createAddress(city, street) {
-  // return {city: city, street: street} = {city, street}
-  return {city, street};
-}
-function createPerson(id, name, address) {
-  return {id, name, address};
+function myForEach(ar, cbFunction) {
+    for (let i = o; i < ar.length; i++) {
+        cbFunction(ar[i], i, ar);
+    }
 }
 
-const persons = [
-  createPerson(123, "Vasya", createAddress("Rehovot", "Parshani")),
-  createPerson(124, "Olya", createAddress("Rehovot", "Plaut")),
-  createPerson(125, "Tolya", createAddress("Tel-Aviv", "Dizengoff")),
-]
-/**
-HW#14
+//1.
+function myFilter (arr, cb) {
+    const newAr = [];
+    myForEach(arr, (n, i, a) => cb (n, i, a) ? newAr.push(n) : 0);
+    return newAr;
+}
 
-3.
-applaying methods of arrays you shold find the persons living in Rehovot and display them out
-  4.
-applaying methods of arrays you shold find the person don't liv in Rehovot and move the at begining of the array persons
- */
+//2.
+function myReduce(array, cb, initRes) {
+    let res;
+    if (initRes) {
+        res = initRes;
+        myForEach(array, (n, i, a) => res = cb(res, n, i, a));
+    }
+    else {
+        res = array[0];
+        const newArray = array.slice(1);
+        myForEach(newArray, (n, i, a) => res = cb(res, n, i, a));
+    }
+    return res;
+}
+const ar20 = [13, 17, 20, 23, 2, 40, 15];
+const arEvOdd = myFilter(ar20, (n, i, a) => a.length %2 == 0 ? n %2 == 0: n %2 == 1);
+console.log(arEvOdd);
+const result = myReduce(ar20, (res, cur) => res + cur, 0);
+console.log(result);

@@ -1,37 +1,76 @@
-function dispOccurrences(array) {
-    const res = createObjOccurrences(array);
-    Object.entries(res).sort((e1, e2) => {
-        const res = e2[1] - e1[1];
-        return res === 0 ? e1[0].localeCompare(e2[0]) : res;
-    }).forEach(e => console.log(`${e[0]} -> ${e[1]}`));
+const circle = {radius: 20, square: function() {
+    return 3.14 * (this.radius ** 2)
+}, perimetr: () => 2 * 3.14 * this.radius,
+toString: function() {
+    return `radius of this circkle is ${this.radius}`
+}};
+console.log(`square = ${circle.square()} \nperimetr = ${circle.perimetr()}`);
+
+console.log();
+function square(circle) {
+    return 3.14 * (circle.radius ** 2);
 }
-//1.
-function createObjOccurrences(arr) {
-    return arr.reduce((res, cur) => {res[cur] = res[cur] ===
-    undefined ? 1 : res[cur] + 1; return res}, {});
+console.log(`squareFan = ${square(circle)}`);
+
+console.log(`circle: ${circle}`);
+
+function Circle(radius) {
+    this.radius = radius;
 }
-//2.
-function countBy (ar, cbfun) {
-    return ar.reduce((res, cur) => {res[cbfun(cur)] =
-    res[cbfun(cur)] === undefined ? 1 : res[cbfun(cur)] + 1; return res}, {});
-    
+Circle.prototype.perimetr = function() {
+    return 2 * 3.14 * this.radius;
 }
+Circle.prototype.square = function() {
+    return 3.14 * (this.radius ** 2);
+}
+Circle.prototype.toString = function() {
+    return `radius of this circle is ${this.radius}`
+}
+const circle10 = new Circle(10);
 
-const ar = ["lmn", "d", "d", "lmn", "a", "lmn", "a", "bc"];
-dispOccurrences(ar);
+/* HW#16
+1.
+const d = new Deferrend()
+d.then(function(res){console.log('1', res); return 'a'; });
 
-const arr1 = [6.4, 7.3, 6.5, 6.9];
-const st1 = countBy(arr1, el => Math.floor(el));
-console.log(st1);
+d.then(function(res){console.log('2', res); return 'b'; });
 
-const arr2 = ['abcd', 'lmnr', 'ab', 'dddd'];
-const st2 = countBy(arr2, el => el.length);
-console.log(st2);
+d.then(function(res){console.log('3', res); return 'c'; });
 
-const arr3 = [
-{age: 25, id: 123, name: "Vasya"}, 
-{age: 50, id: 123, name: "Vasya"},
-{age: 25, id: 123, name: "Vasya"},
-{age: 70, id: 123, name: "Vasya"}]
-const st3 = countBy(arr3, el => el.age);
-console.log(st3);
+d.resolve('hello');
+output
+1 hello
+2 a
+3 b
+
+2.
+const myArray = new MyArray(10);
+output
+myArray.get(index:1000) - result 10
+write method geting an index value and returning common value (set in constructor)
+
+myArray.set(index, value);
+write method set that sets a given value and a given index
+
+myArray.setValue(value) sets new value in all elements of myArray
+
+example
+*/
+// const myArray = new MyArray(10);
+// console.log(myArray.get(100)) //dispay out = 10
+// myArray.set(100, 500) //sets 500 of index 100
+// console.log(myArray.get(200)) // dispay out = 10
+// console.log(myArray.get(100)) // dispay out = 500
+// myArray.setValue(300);
+// console.log(myArray.get(100)) // dispay out = 300
+// console.log(myArray.get(200)) // dispay out = 300
+
+//standart constructions
+Array.prototype.filter = function(cbPredicate) {
+    console.log('Tel-Ran');
+    const res = [];
+    this.forEach((n, i, a) => cbPredicate(n, i, a) && res.push(n));
+    return res;
+}
+const ar = [1, 2, 4, 5, 100];
+ar.filter(n => n % 2 !== 0).forEach(n => console.log(n));

@@ -80,4 +80,4 @@ function CountChildrenKinderGarten(persons, kindergarten) {
     return persons.filter(n => n.getKinderGarten !== undefined)
     .filter(n => n.getKinderGarten() === kindergarten).length;
 }
-console.log(CountChildrenKinderGarten(persons, 'Boker'));
+console.log(CountChildrenKinderGarten(persons, 'Shalom'));

@@ -71,8 +71,11 @@ function CountOfPersonsType(persons, type) {
 console.log(CountOfPersonsType(persons, 'WageEmployee'));
 
 function ComputeSalaryBudget(persons) {
-    return persons.filter(n => !!n.computeSalary)
-    .reduce((res, per) => res + per.computeSalary(), 0);
+    // return persons.filter(n => !!n.computeSalary)
+    // .reduce((res, per) => res + per.computeSalary(), 0);
+    const allEmployees = persons.filter(p => !!p.computeSalary);
+    const salaryValuers = allEmployees.map(p => p.computeSalary());
+    return salaryValuers.reduce((res, cur) => res + cur);
 }
 console.log(ComputeSalaryBudget(persons))
 
@@ -81,3 +84,12 @@ function CountChildrenKinderGarten(persons, kindergarten) {
     .filter(n => n.getKinderGarten() === kindergarten).length;
 }
 console.log(CountChildrenKinderGarten(persons, 'Shalom'));
+
+/*                       CW#18 */
+
+const pr4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
+function testOutput(func, expected) {
+    console.log(`function: ${func.name} ; expected result: ${expected} ; actual result: ${func()}`)
+}
+testOutput(pr4.computeSalary.bind(pr4), 2000);
+testOutput(ComputeSalaryBudget.bind(undefined, persons), 3000);

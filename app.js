@@ -71,7 +71,7 @@ function CountOfPersonsType(persons, type) {
 console.log(CountOfPersonsType(persons, 'WageEmployee'));
 
 function ComputeSalaryBudget(persons) {
-    return persons.filter(n => n.constructor.name !== 'Child')
+    return persons.filter(n => !!n.computeSalary)
     .reduce((res, per) => res + per.computeSalary(), 0);
 }
 console.log(ComputeSalaryBudget(persons))

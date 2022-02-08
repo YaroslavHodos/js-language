@@ -1,95 +1,38 @@
-class Person {
-    #id;
-    #name;
-    constructor(id, name) {
-        this.#id = id;
-        this.#name = name;
-    }
-    getId() {
-        return this.#id;
-    }
-    getName() {
-        return this.#name;
-    }
-    toString() {
-        return `id: ${this.#id}; name: ${this.#name};`
-    }
+const point = {
+    x: 3,
+    y: 4
+};
+function displayPointInSpace(z, t) {
+    //"this" - reference to any object having properties x and y
+    console.log(`x: ${this.x}, y: ${this.y}, z: ${z}, t: ${t}`)
 }
-
-class Employee extends Person {
-    #salary;
-    constructor(id, name, salary) {
-        super(id, name);// call the constructor of Person
-        this.#salary = salary;
-    }
-    computeSalary() {
-        return this.#salary;
-    }
-    toString(){
-        return super.toString() + ` salary: ${this.computeSalary()};`;
-    }
-}
-
-class Child extends Person {
-    #kindergarten;
-    constructor(id, name, kindergarten) {
-    super(id, name);
-    this.#kindergarten = kindergarten;
-    }
-    getKinderGarten() {
-        return this.#kindergarten;
-    }
-    toString() {
-        return super.toString() + ` kindergarten: ${this.#kindergarten};`;
-    }
-}
-
-class WageEmployee extends Employee {
-    #hours;
-    #wage;
-    constructor(id, name, salary, hours, wage) {
-        super(id, name, salary);
-        this.#hours = hours;
-        this.#wage = wage;
-    }
-    computeSalary() {
-        return super.computeSalary() + this.#hours * this.#wage;
-    }
+// point.method = displayPointInSpace;
+// point.method(10, 20);
+// displayPointInSpace.call(point, 10, 20);
+// displayPointInSpace.mybind(point, 10, 20)();
+// displayPointInSpace.apply(point, [10, 20]);
+Function.prototype.mybind = function(thisObj, ...args) {
+    //this - reference to any functional object (in example - displayPointInSpace)
+    //thisObject - reference to any object (in example - point) 
     
+    return (...params) => {
+            thisObj.method123456 = this;
+            const res = thisObj.method123456(...args.concat(params));
+            delete thisObj.method123456;
+            return res;
+    }
 }
-
-const persons = [
-    new Child(100, 'Olya', 'Shalom'),
-    new Child(101, 'Sergey', 'Boker'),
-    new Child(102, 'Kolya', 'Shalom'),
-    new Employee(103, 'Vasya', 1000),
-    new WageEmployee(104, 'Tolya', 1000, 10, 100)
-]
-function CountOfPersonsType(persons, type) {
-    return persons.filter(n => n.constructor.name === type).length;
-}
-console.log(CountOfPersonsType(persons, 'WageEmployee'));
-
-function ComputeSalaryBudget(persons) {
-    // return persons.filter(n => !!n.computeSalary)
-    // .reduce((res, per) => res + per.computeSalary(), 0);
-    const allEmployees = persons.filter(p => !!p.computeSalary);
-    const salaryValuers = allEmployees.map(p => p.computeSalary());
-    return salaryValuers.reduce((res, cur) => res + cur);
-}
-console.log(ComputeSalaryBudget(persons))
-
-function CountChildrenKinderGarten(persons, kindergarten) {
-    return persons.filter(n => n.getKinderGarten !== undefined)
-    .filter(n => n.getKinderGarten() === kindergarten).length;
-}
-console.log(CountChildrenKinderGarten(persons, 'Shalom'));
-
-/*                       CW#18 */
-
-const pr4 = new WageEmployee(126, 'Asaf', 1000, 10, 100);
-function testOutput(func, expected) {
-    console.log(`function: ${func.name} ; expected result: ${expected} ; actual result: ${func()}`)
-}
-testOutput(pr4.computeSalary.bind(pr4), 2000);
-testOutput(ComputeSalaryBudget.bind(undefined, persons), 3000);
+/****************************************************** */
+//arguments are passed at function call
+const funDisplay = displayPointInSpace.mybind(point);
+funDisplay(10, 20); //function call 
+/************************************************************ */
+/********************************************************** */
+//all arguments are bound by the method "mybind"
+const funDisplayArguments = displayPointInSpace.mybind(point, 10, 20);
+funDisplayArguments()
+/***************************************************************** */
+//mixed - part of arguments are bound by the method "mybind"
+// and other part of arguments are passed at function call
+const funDisplayMixed = displayPointInSpace.mybind(point, 10);
+funDisplayMixed(20) 

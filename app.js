@@ -1,38 +1,26 @@
-const point = {
-    x: 3,
-    y: 4
-};
-function displayPointInSpace(z, t) {
-    //"this" - reference to any object having properties x and y
-    console.log(`x: ${this.x}, y: ${this.y}, z: ${z}, t: ${t}`)
+function getRandomNumber(min, max) {
+    /*TODO
+    min - minimal value
+    max - max value
+    Example getRandomNumber(0,1) -> returns number that is either 0 or 1
+    if min > max then you should swap values
+    swap should be without additional variable in one line code
+    */
+   [min, max] = [min, max].sort((a,b) => a - b);
+   return Math.floor(Math.random()*((max) - min + 1) + min);
 }
-// point.method = displayPointInSpace;
-// point.method(10, 20);
-// displayPointInSpace.call(point, 10, 20);
-// displayPointInSpace.mybind(point, 10, 20)();
-// displayPointInSpace.apply(point, [10, 20]);
-Function.prototype.mybind = function(thisObj, ...args) {
-    //this - reference to any functional object (in example - displayPointInSpace)
-    //thisObject - reference to any object (in example - point) 
-    
-    return (...params) => {
-            thisObj.method123456 = this;
-            const res = thisObj.method123456(...args.concat(params));
-            delete thisObj.method123456;
-            return res;
-    }
+console.log(getRandomNumber(2,1));
+
+function concatinate(prefix) {
+    /*write the function concatinate(prefix)
+    that by using the following code
+    const concatApp = concatinate('App - ')
+    const concatMessage = concatApp('Test status: Done')
+    console.log(concatMassage)
+    there should be displayed out App - Test status: Done
+    */
+   return concat => prefix + concat;
 }
-/****************************************************** */
-//arguments are passed at function call
-const funDisplay = displayPointInSpace.mybind(point);
-funDisplay(10, 20); //function call 
-/************************************************************ */
-/********************************************************** */
-//all arguments are bound by the method "mybind"
-const funDisplayArguments = displayPointInSpace.mybind(point, 10, 20);
-funDisplayArguments()
-/***************************************************************** */
-//mixed - part of arguments are bound by the method "mybind"
-// and other part of arguments are passed at function call
-const funDisplayMixed = displayPointInSpace.mybind(point, 10);
-funDisplayMixed(20) 
+const concatApp = concatinate('App - ');
+const concatMessage = concatApp('Test status: Done');
+console.log(concatMessage);

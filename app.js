@@ -6,8 +6,8 @@ function getRandomNumber(min, max) {
     if min > max then you should swap values
     swap should be without additional variable in one line code
     */
-   [min, max] = [min, max].sort((a,b) => a - b);
-   return Math.floor(Math.random()*((max) - min + 1) + min);
+   min <= max || ([min, max] = [max, min]);
+   return Math.floor(min + Math.random()*((max) - min + 1));
 }
 console.log(getRandomNumber(2,1));
 

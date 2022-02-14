@@ -7,9 +7,9 @@ function getRandomNumber(min, max) {
     swap should be without additional variable in one line code
     */
    min <= max || ([min, max] = [max, min]);
-   return Math.floor(min + Math.random()*((max) - min + 1));
+   return Math.floor(min + Math.random()*(max - min + 1));
 }
-console.log(getRandomNumber(2,1));
+console.log(getRandomNumber(10,3));
 
 function concatinate(prefix) {
     /*write the function concatinate(prefix)
@@ -19,7 +19,7 @@ function concatinate(prefix) {
     console.log(concatMassage)
     there should be displayed out App - Test status: Done
     */
-   return concat => prefix + concat;
+   return (...args) => [prefix, ...args].join('');
 }
 const concatApp = concatinate('App - ');
 const concatMessage = concatApp('Test status: Done');
